@@ -33,7 +33,7 @@ export default function SignupPage() {
   }, [])
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#f7f9fb]">
+    <div className="flex flex-col md:flex-row min-h-[100dvh] w-full bg-[#f7f9fb] md:h-screen md:overflow-hidden">
 
 
       {/* ── Left Panel: Feature Teaser ────────────────────────── */}
@@ -83,7 +83,7 @@ export default function SignupPage() {
       </div>
 
       {/* ── Right Panel: Signup Form ──────────────────────────── */}
-      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-8 lg:px-24 py-12 bg-white h-full overflow-y-auto">
+      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 lg:px-24 py-10 lg:py-12 bg-white flex-1 md:h-full md:overflow-y-auto">
         <div className="w-full max-w-sm">
 
           {/* Mobile logo */}

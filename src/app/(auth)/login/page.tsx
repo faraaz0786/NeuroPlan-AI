@@ -17,7 +17,7 @@ export default function LoginPage() {
   }, [])
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#f7f9fb]">
+    <div className="flex flex-col md:flex-row min-h-[100dvh] w-full bg-[#f7f9fb] md:h-screen md:overflow-hidden">
 
         {/* ── Left Panel: Mesh Gradient ─────────────────────── */}
         <div className="hidden md:flex md:w-1/2 mesh-gradient relative items-end p-16 h-full overflow-hidden">
@@ -36,7 +36,7 @@ export default function LoginPage() {
         </div>
 
         {/* ── Right Panel: Form ─────────────────────────────── */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 md:px-20 py-12 bg-white h-full overflow-y-auto">
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-6 md:px-20 py-10 md:py-12 bg-white flex-1 md:h-full md:overflow-y-auto">
           <div className="w-full max-w-sm space-y-10">
 
             {/* Logo */}

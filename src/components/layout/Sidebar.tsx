@@ -7,7 +7,7 @@ import { logout } from '@/actions/auth'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-const navItems = [
+export const navItems = [
   { href: '/dashboard',  label: 'Dashboard',    icon: LayoutDashboard },
   { href: '/planner',    label: 'Study Planner', icon: BookOpen        },
   { href: '/calendar',   label: 'Calendar',      icon: Calendar        },

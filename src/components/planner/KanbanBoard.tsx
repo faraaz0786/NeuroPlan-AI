@@ -82,15 +82,16 @@ export function KanbanBoard() {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
+      <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible gap-6 h-full pb-4 -mx-4 px-4 md:px-0 md:mx-0">
         {COLUMNS.map((col) => (
-          <KanbanColumn
-            key={col.id}
-            id={col.id}
-            title={col.title}
-            colorClass={col.colorClass}
-            tasks={tasks.filter((t) => t.status === col.id)}
-          />
+          <div key={col.id} className="min-w-[85vw] md:min-w-0 snap-center h-full flex flex-col">
+            <KanbanColumn
+              id={col.id}
+              title={col.title}
+              colorClass={col.colorClass}
+              tasks={tasks.filter((t) => t.status === col.id)}
+            />
+          </div>
         ))}
       </div>
 

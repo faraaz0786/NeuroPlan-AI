@@ -1,12 +1,15 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Bell, Search, BellOff, CheckCheck, AlertCircle, AlarmClock, Settings, User } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Bell, Search, BellOff, CheckCheck, AlertCircle, AlarmClock, Settings, User, Menu, X } from 'lucide-react'
 import { useNotifications } from '@/hooks/useNotifications'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import type { Notification } from '@/services/notification.service'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
+import { navItems } from '@/components/layout/Sidebar'
 
 // Icon per notification type
 function NotificationIcon({ type }: { type: Notification['type'] }) {
@@ -29,7 +32,9 @@ function NotificationIcon({ type }: { type: Notification['type'] }) {
 
 export function Header() {
   const [open, setOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
   const { notifications, unreadCount, markRead, markAllRead } = useNotifications()
 
   // Close dropdown when clicking outside
@@ -43,11 +48,25 @@ export function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [open])
 
+  // Auto-close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
+
   return (
-    <header
-      className="h-[60px] flex items-center gap-4 px-6 border-b border-[#e2e8f0] sticky top-0 z-40"
+    <>
+      <header
+      className="h-[60px] flex items-center gap-4 px-4 md:px-6 border-b border-[#e2e8f0] sticky top-0 z-40"
       style={{ background: 'rgba(247,249,251,0.85)', backdropFilter: 'blur(12px)' }}
     >
+      {/* Mobile Menu Button */}
+      <button 
+        onClick={() => setMobileMenuOpen(true)}
+        className="md:hidden p-2 -ml-2 text-[#6d7a77] hover:bg-[#e6e8ea] rounded-full transition-colors"
+      >
+        <Menu className="w-5 h-5" />
+      </button>
+
       {/* Search */}
       <div className="flex-1 max-w-sm">
         <div className="relative">
@@ -190,6 +209,84 @@ export function Header() {
           <User className="w-4 h-4" />
         </div>
       </div>
-    </header>
+      </header>
+
+      {/* ── Mobile Navigation Drawer ─────────────────────────────────── */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 md:hidden"
+            />
+            {/* Sliding Drawer */}
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="fixed inset-y-0 left-0 w-[260px] bg-[#f2f4f6] shadow-2xl z-50 flex flex-col py-8 md:hidden"
+            >
+              <div className="flex items-center justify-between px-6 mb-8">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0"
+                    style={{ background: 'linear-gradient(135deg, #00685f, #008378)' }}
+                  >
+                    🧠
+                  </div>
+                  <span className="text-[17px] font-bold tracking-tight text-[#00685f]">
+                    NeuroPlan AI
+                  </span>
+                </div>
+                <button 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 text-[#6d7a77] hover:bg-[#e6e8ea] rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <nav className="flex-1 space-y-0.5">
+                {navItems.map((item) => {
+                  const isActive = pathname.startsWith(item.href)
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        'relative flex items-center gap-3 px-6 py-3 text-sm font-medium transition-all duration-200 outline-none',
+                        isActive
+                          ? 'text-[#00685f] font-bold bg-white rounded-r-full shadow-sm'
+                          : 'text-[#3d4947] hover:text-[#191c1e] hover:bg-[#e6e8ea]'
+                      )}
+                    >
+                      <item.icon className="w-[18px] h-[18px] mb-0.5 relative z-10" />
+                      <span className="relative z-10">{item.label}</span>
+                    </Link>
+                  )
+                })}
+              </nav>
+
+              <div className="px-6 py-4">
+                <div className="flex items-center gap-3 px-4 py-3 bg-[#e6e8ea] rounded-xl">
+                  <div className="w-8 h-8 rounded-full bg-[#00685f] text-white flex items-center justify-center shrink-0">
+                    <User className="w-4 h-4" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold text-[#191c1e] leading-tight">Student</span>
+                    <span className="text-xs text-[#6d7a77]">Free Plan</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
