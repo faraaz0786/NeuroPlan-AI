@@ -230,7 +230,7 @@ export default function SignupPage() {
 
           <footer className="mt-16 text-center">
             <p className="text-[10px] font-bold text-[#bcc9c6] uppercase tracking-[0.2em]">
-              NeuroPlan AI — The Cognitive Atelier © 2024
+              NeuroPlan AI — The Cognitive Atelier © 2026
             </p>
           </footer>
         </div>
