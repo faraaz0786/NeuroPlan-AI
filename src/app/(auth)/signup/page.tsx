@@ -33,11 +33,11 @@ export default function SignupPage() {
   }, [])
 
   return (
-    <div className="flex min-h-screen w-full bg-[#f7f9fb]">
+    <div className="flex h-screen w-full overflow-hidden bg-[#f7f9fb]">
 
 
       {/* ── Left Panel: Feature Teaser ────────────────────────── */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 bg-[#f2f4f6] p-16 relative overflow-hidden">
+      <div className="hidden lg:flex flex-col justify-between w-1/2 bg-[#f2f4f6] p-16 h-full relative overflow-hidden">
         {/* Decorative orb */}
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full opacity-40 blur-3xl pointer-events-none" style={{ background: "#00685f15" }} />
 
@@ -83,7 +83,7 @@ export default function SignupPage() {
       </div>
 
       {/* ── Right Panel: Signup Form ──────────────────────────── */}
-      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-8 lg:px-24 py-12 bg-white">
+      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-8 lg:px-24 py-12 bg-white h-full overflow-y-auto">
         <div className="w-full max-w-sm">
 
           {/* Mobile logo */}

@@ -17,10 +17,10 @@ export default function LoginPage() {
   }, [])
 
   return (
-    <div className="flex min-h-screen w-full bg-[#f7f9fb]">
+    <div className="flex h-screen w-full overflow-hidden bg-[#f7f9fb]">
 
         {/* ── Left Panel: Mesh Gradient ─────────────────────── */}
-        <div className="hidden md:flex md:w-1/2 mesh-gradient relative items-end p-16 overflow-hidden">
+        <div className="hidden md:flex md:w-1/2 mesh-gradient relative items-end p-16 h-full overflow-hidden">
           {/* glass overlay */}
           <div className="absolute inset-0 bg-black/10" />
           {/* blur orb */}
@@ -36,7 +36,7 @@ export default function LoginPage() {
         </div>
 
         {/* ── Right Panel: Form ─────────────────────────────── */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 md:px-20 py-12 bg-white">
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 md:px-20 py-12 bg-white h-full overflow-y-auto">
           <div className="w-full max-w-sm space-y-10">
 
             {/* Logo */}
