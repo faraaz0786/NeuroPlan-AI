@@ -336,3 +336,4 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 <div align="center">
   <p>Built by <strong>Faraaz</strong> with Next.js 16, Supabase, and Groq AI.</p>
 </div>
+ 9
