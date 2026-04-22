@@ -17,8 +17,7 @@ export default function LoginPage() {
   }, [])
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#f7f9fb]">
-      <div className="flex w-full max-w-[1440px] min-h-screen md:min-h-[860px] md:max-h-[920px] md:rounded-2xl overflow-hidden shadow-[0_12px_40px_rgba(15,23,42,0.08)]">
+    <div className="flex min-h-screen w-full bg-[#f7f9fb]">
 
         {/* ── Left Panel: Mesh Gradient ─────────────────────── */}
         <div className="hidden md:flex md:w-1/2 mesh-gradient relative items-end p-16 overflow-hidden">
@@ -174,8 +173,7 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-      </div>
-
+      {/* End of Right Panel */}
       {/* AI Security Badge */}
       <div 
         onClick={(e) => e.stopPropagation()}
@@ -193,6 +191,6 @@ export default function LoginPage() {
           AI-Enhanced Security Active
         </span>
       </div>
-    </main>
+    </div>
   )
 }
