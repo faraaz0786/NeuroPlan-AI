@@ -1,13 +1,20 @@
 "use client"
 
 import Link from "next/link"
-import { useActionState, useState } from "react"
+import { useActionState, useState, useEffect } from "react"
 import { login, signInWithGoogle } from "@/actions/auth"
 import { Eye, EyeOff } from "lucide-react"
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(login, { error: "" })
   const [showPassword, setShowPassword] = useState(false)
+  const [showBubble, setShowBubble] = useState(true)
+
+  useEffect(() => {
+    const handleClick = () => setShowBubble(false)
+    document.addEventListener("click", handleClick)
+    return () => document.removeEventListener("click", handleClick)
+  }, [])
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#f7f9fb]">
@@ -170,7 +177,12 @@ export default function LoginPage() {
       </div>
 
       {/* AI Security Badge */}
-      <div className="fixed bottom-8 right-8 hidden lg:flex items-center gap-3 bg-white/80 backdrop-blur-xl px-4 py-3 rounded-full border border-[#e2e8f0] shadow-lg">
+      <div 
+        onClick={(e) => e.stopPropagation()}
+        className={`fixed bottom-8 right-8 hidden lg:flex items-center gap-3 bg-white/80 backdrop-blur-xl px-4 py-3 rounded-full border border-[#e2e8f0] shadow-lg transition-all duration-500 transform ${
+          showBubble ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
         <div
           className="w-7 h-7 rounded-full flex items-center justify-center text-sm"
           style={{ background: "#ffddb8" }}

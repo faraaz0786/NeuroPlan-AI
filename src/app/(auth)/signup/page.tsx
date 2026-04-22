@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useActionState } from "react"
+import { useActionState, useState, useEffect } from "react"
 import { signup, signInWithGoogle } from "@/actions/auth"
 
 const features = [
@@ -24,9 +24,17 @@ const features = [
 
 export default function SignupPage() {
   const [state, formAction, isPending] = useActionState(signup, { error: "" })
+  const [showBubble, setShowBubble] = useState(true)
+
+  useEffect(() => {
+    const handleClick = () => setShowBubble(false)
+    document.addEventListener("click", handleClick)
+    return () => document.removeEventListener("click", handleClick)
+  }, [])
 
   return (
     <div className="flex min-h-screen w-full bg-[#f7f9fb]">
+
 
       {/* ── Left Panel: Feature Teaser ────────────────────────── */}
       <div className="hidden lg:flex flex-col justify-between w-1/2 bg-[#f2f4f6] p-16 relative overflow-hidden">
@@ -71,22 +79,7 @@ export default function SignupPage() {
           </div>
         </div>
 
-        {/* Social proof */}
-        <div className="relative z-10 flex items-center gap-4">
-          <div className="flex -space-x-3">
-            {["👩‍🎓", "👨‍💻", "🧑‍🔬"].map((em, i) => (
-              <div
-                key={i}
-                className="w-10 h-10 rounded-full border-2 border-[#f2f4f6] bg-[#e6e8ea] flex items-center justify-center text-lg"
-              >
-                {em}
-              </div>
-            ))}
-          </div>
-          <p className="text-sm text-[#3d4947]">
-            Joined by <span className="font-bold text-[#191c1e]">2,400+</span> top scholars this week.
-          </p>
-        </div>
+        {/* Social proof removed per user request */}
       </div>
 
       {/* ── Right Panel: Signup Form ──────────────────────────── */}
@@ -243,7 +236,12 @@ export default function SignupPage() {
         </div>
 
         {/* AI Assistant Bubble */}
-        <div className="fixed bottom-8 right-8 z-50">
+        <div 
+          onClick={(e) => e.stopPropagation()}
+          className={`fixed bottom-8 right-8 z-50 transition-all duration-500 transform ${
+            showBubble ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+          }`}
+        >
           <div className="bg-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-2xl flex items-start gap-3 max-w-xs border border-[#e2e8f0]">
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-lg"
