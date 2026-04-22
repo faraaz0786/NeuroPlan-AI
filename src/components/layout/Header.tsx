@@ -124,7 +124,7 @@ export function Header() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -8, scale: 0.97 }}
                 transition={{ duration: 0.15, ease: 'easeOut' }}
-                className="fixed inset-x-4 top-[70px] sm:absolute sm:inset-x-auto sm:-right-2 sm:mt-3 w-auto sm:w-[380px] bg-white border border-[#e2e8f0] rounded-2xl shadow-2xl overflow-hidden z-50"
+                className="absolute -right-12 sm:-right-2 mt-3 w-[calc(100vw-32px)] sm:w-[380px] origin-top-right bg-white border border-[#e2e8f0] rounded-2xl shadow-2xl overflow-hidden z-50"
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-[#e2e8f0]">
