@@ -95,7 +95,7 @@ export default function CalendarPage() {
   return (
     <div className="flex flex-col h-full w-full max-w-7xl mx-auto gap-6">
       {/* ── Page Header ──────────────────────────────── */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-[#191c1e]">Calendar</h1>
           <p className="text-[#6d7a77] mt-1 text-sm">
@@ -131,7 +131,7 @@ export default function CalendarPage() {
       </div>
 
       {/* ── Stats Bar ────────────────────────────────── */}
-      <div className="flex items-center gap-4">
+      <div className="grid grid-cols-2 md:flex md:items-center gap-2 md:gap-4 w-full">
         {[
           { label: 'Total Tasks', value: monthStats.total, color: '#00685f' },
           { label: 'Completed', value: monthStats.completed, color: '#059669' },
@@ -150,11 +150,12 @@ export default function CalendarPage() {
       </div>
 
       {/* ── Calendar Grid ────────────────────────────── */}
-      <div
-        className="flex-1 overflow-hidden flex flex-col bg-white border border-[#e2e8f0]"
-        style={{ borderRadius: '1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
-      >
-        {/* Day headers */}
+      <div className="flex-1 w-full overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
+        <div
+          className="min-w-[700px] md:min-w-full h-full flex flex-col bg-white border border-[#e2e8f0]"
+          style={{ borderRadius: '1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
+        >
+          {/* Day headers */}
         <div className="grid grid-cols-7 border-b border-[#e2e8f0]" style={{ background: '#f7f9fb' }}>
           {DAY_HEADERS.map((day) => (
             <div key={day} className="py-3 text-center text-[11px] font-bold uppercase tracking-wider text-[#6d7a77]">
@@ -231,13 +232,14 @@ export default function CalendarPage() {
 
         {/* Loading overlay */}
         {isLoading && (
-          <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-            <div className="flex items-center gap-2 text-sm text-[#6d7a77]">
-              <CalendarDays className="w-4 h-4 animate-pulse" />
+          <div className="absolute inset-0 bg-white/60 flex items-center justify-center rounded-2xl z-10">
+            <div className="flex items-center gap-2 text-sm font-bold text-[#6d7a77]">
+              <CalendarDays className="w-5 h-5 animate-pulse" />
               Loading calendar...
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   )
