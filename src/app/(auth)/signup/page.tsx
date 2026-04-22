@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useActionState } from "react"
-import { signup } from "@/actions/auth"
+import { signup, signInWithGoogle } from "@/actions/auth"
 
 const features = [
   {
@@ -205,6 +205,7 @@ export default function SignupPage() {
             <div className="grid grid-cols-2 gap-4 w-full">
               <button
                 type="button"
+                onClick={() => signInWithGoogle()}
                 className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#f2f4f6] hover:bg-[#e6e8ea] transition-colors"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
